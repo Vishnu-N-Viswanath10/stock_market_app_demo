@@ -11,9 +11,7 @@ import 'presentation/pages/home_page.dart';
 import 'presentation/bloc/navigation/navigation_bloc.dart';
 
 void main() {
-  // Ensure Flutter bindings are initialized before using shared_preferences
   WidgetsFlutterBinding.ensureInitialized();
-
   // Create your repositories and data sources
   final stockRepository = StockRepositoryImpl(MockStockDataSource());
   final watchlistLocalDataSource = WatchlistLocalDataSource();
