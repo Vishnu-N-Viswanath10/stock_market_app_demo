@@ -80,6 +80,7 @@ class _RenameWatchlistDialogState extends State<RenameWatchlistDialog> {
           }
           return AlertDialog(
             title: const Text(AppStrings.renameWatchlist),
+            backgroundColor: Theme.of(context).secondaryHeaderColor,
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

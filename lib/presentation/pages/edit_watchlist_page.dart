@@ -16,6 +16,7 @@ class EditWatchlistPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(AppStrings.editWatchlist),
+            backgroundColor: Theme.of(context).secondaryHeaderColor,
             actions: [
               IconButton(
                 icon: const Icon(Icons.check, color: Colors.green),

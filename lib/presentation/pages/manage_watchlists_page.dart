@@ -14,7 +14,10 @@ class ManageWatchlistsPage extends StatelessWidget {
     return BlocBuilder<WatchlistBloc, WatchlistState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(title: Text(AppStrings.manageWatchlists)),
+          appBar: AppBar(
+            title: Text(AppStrings.manageWatchlists),
+            backgroundColor: Theme.of(context).secondaryHeaderColor,
+          ),
           body: ReorderableListView(
             onReorder: (oldIndex, newIndex) {
               if (newIndex > oldIndex) newIndex -= 1;
@@ -65,6 +68,7 @@ class ManageWatchlistsPage extends StatelessWidget {
   void _showDeleteConfirmation(BuildContext context, int index, String name) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       builder: (context) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -97,7 +101,7 @@ class ManageWatchlistsPage extends StatelessWidget {
                         );
                         Navigator.pop(context);
                       },
-                      child:const Text(AppStrings.delete),
+                      child: const Text(AppStrings.delete),
                     ),
                   ),
                 ],

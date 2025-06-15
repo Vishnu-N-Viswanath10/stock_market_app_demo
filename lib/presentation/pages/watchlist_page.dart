@@ -54,6 +54,9 @@ class WatchlistPage extends StatelessWidget {
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).secondaryHeaderColor,
                           builder: (context) => CreateWatchlistBottomSheet(
                             currentWatchlistCount: state.groupNames.length,
                           ),
@@ -145,6 +148,7 @@ class WatchlistPage extends StatelessWidget {
   ) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       builder: (context) {
         return WatchlistMenuSheet(
           watchlistCount: watchlistCount,

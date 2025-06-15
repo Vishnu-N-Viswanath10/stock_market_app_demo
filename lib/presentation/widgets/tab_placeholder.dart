@@ -15,8 +15,10 @@ class TabPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title),
-       backgroundColor: Theme.of(context).secondaryHeaderColor,),
+      appBar: AppBar(
+        title: Text(title),
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
