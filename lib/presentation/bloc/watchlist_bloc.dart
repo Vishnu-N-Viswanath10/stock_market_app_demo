@@ -12,14 +12,14 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   final StockRepository stockRepository;
   final WatchlistLocalDataSource localDataSource;
 
-  WatchlistBloc({
-    required this.stockRepository,
-    required this.localDataSource,
-  }) : super(WatchlistState.initial()) {
+  WatchlistBloc({required this.stockRepository, required this.localDataSource})
+    : super(WatchlistState.initial()) {
     on<LoadWatchlistsFromStorage>(_onLoadWatchlistsFromStorage);
 
     on<SwitchWatchlistGroup>((event, emit) {
-      emit(state.copyWith(selectedGroupIndex: event.groupIndex, isEditMode: false));
+      emit(
+        state.copyWith(selectedGroupIndex: event.groupIndex, isEditMode: false),
+      );
     });
 
     on<AddStockToWatchlist>((event, emit) async {
@@ -28,8 +28,12 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
       final watchlists = List<List<Stock>>.from(state.watchlists);
       if (!watchlists[groupIndex].any((s) => s.code == stock.code) &&
           watchlists[groupIndex].length < kMaxStocksPerWatchlist) {
-        watchlists[groupIndex] = List<Stock>.from(watchlists[groupIndex])..add(stock);
-        final newState = state.copyWith(watchlists: watchlists, errorMessage: null);
+        watchlists[groupIndex] = List<Stock>.from(watchlists[groupIndex])
+          ..add(stock);
+        final newState = state.copyWith(
+          watchlists: watchlists,
+          errorMessage: null,
+        );
         emit(newState);
         await _saveToStorage(newState);
       } else if (watchlists[groupIndex].length >= kMaxStocksPerWatchlist) {
@@ -43,7 +47,10 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
       final watchlists = List<List<Stock>>.from(state.watchlists);
       watchlists[groupIndex] = List<Stock>.from(watchlists[groupIndex])
         ..removeWhere((s) => s.code == stock.code);
-      final newState = state.copyWith(watchlists: watchlists, errorMessage: null);
+      final newState = state.copyWith(
+        watchlists: watchlists,
+        errorMessage: null,
+      );
       emit(newState);
       await _saveToStorage(newState);
     });
@@ -57,7 +64,10 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
       final stock = stocks.removeAt(oldIndex);
       stocks.insert(newIndex, stock);
       watchlists[groupIndex] = stocks;
-      final newState = state.copyWith(watchlists: watchlists, errorMessage: null);
+      final newState = state.copyWith(
+        watchlists: watchlists,
+        errorMessage: null,
+      );
       emit(newState);
       await _saveToStorage(newState);
     });
@@ -91,7 +101,9 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
     on<RenameWatchlist>((event, emit) async {
       final newName = event.newName.trim();
       final exists = state.groupNames.asMap().entries.any(
-        (entry) => entry.key != event.index && entry.value.toLowerCase() == newName.toLowerCase(),
+        (entry) =>
+            entry.key != event.index &&
+            entry.value.toLowerCase() == newName.toLowerCase(),
       );
       if (exists) {
         emit(state.copyWith(errorMessage: AppStrings.watchlistNameExists));
@@ -99,7 +111,10 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
       }
       final groupNames = List<String>.from(state.groupNames);
       groupNames[event.index] = newName;
-      final newState = state.copyWith(groupNames: groupNames, errorMessage: null);
+      final newState = state.copyWith(
+        groupNames: groupNames,
+        errorMessage: null,
+      );
       emit(newState);
       await _saveToStorage(newState);
     });
@@ -131,7 +146,11 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
       groupNames.insert(event.newIndex, name);
       watchlists.insert(event.newIndex, list);
 
-      final newState = state.copyWith(groupNames: groupNames, watchlists: watchlists, errorMessage: null);
+      final newState = state.copyWith(
+        groupNames: groupNames,
+        watchlists: watchlists,
+        errorMessage: null,
+      );
       emit(newState);
       await _saveToStorage(newState);
     });
@@ -154,35 +173,49 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   }
 
   Future<void> _onLoadWatchlistsFromStorage(
-      LoadWatchlistsFromStorage event, Emitter<WatchlistState> emit) async {
+    LoadWatchlistsFromStorage event,
+    Emitter<WatchlistState> emit,
+  ) async {
     final data = await localDataSource.loadWatchlists();
     if (data != null) {
       final groupNames = List<String>.from(data['groupNames']);
       final watchlists = (data['watchlists'] as List)
-          .map<List<StockModel>>((list) => (list as List)
-              .map((s) => StockModel.fromJson(s as Map<String, dynamic>))
-              .toList())
+          .map<List<StockModel>>(
+            (list) => (list as List)
+                .map((s) => StockModel.fromJson(s as Map<String, dynamic>))
+                .toList(),
+          )
           .toList();
-      emit(state.copyWith(
-        groupNames: groupNames,
-        watchlists: watchlists,
-        selectedGroupIndex: 0,
-        errorMessage: null,
-      ));
+      emit(
+        state.copyWith(
+          groupNames: groupNames,
+          watchlists: watchlists,
+          selectedGroupIndex: 0,
+          errorMessage: null,
+        ),
+      );
     }
   }
 
   Future<void> _saveToStorage(WatchlistState state) async {
     await localDataSource.saveWatchlists(
       state.groupNames,
-      state.watchlists.map((list) => list.map((s) => StockModel(
-        code: s.code,
-        name: s.name,
-        exchange: s.exchange,
-        ltp: s.ltp,
-        change: s.change,
-        changePercent: s.changePercent,
-      )).toList()).toList(),
+      state.watchlists
+          .map(
+            (list) => list
+                .map(
+                  (s) => StockModel(
+                    code: s.code,
+                    name: s.name,
+                    exchange: s.exchange,
+                    ltp: s.ltp,
+                    change: s.change,
+                    changePercent: s.changePercent,
+                  ),
+                )
+                .toList(),
+          )
+          .toList(),
     );
   }
 }

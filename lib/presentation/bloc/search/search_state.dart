@@ -11,11 +11,8 @@ class SearchState {
     required this.selectedCodes,
   });
 
-  factory SearchState.initial(List<Stock> defaultStocks) => SearchState(
-        query: '',
-        results: defaultStocks,
-        selectedCodes: {},
-      );
+  factory SearchState.initial(List<Stock> defaultStocks) =>
+      SearchState(query: '', results: defaultStocks, selectedCodes: {});
 
   SearchState copyWith({
     String? query,

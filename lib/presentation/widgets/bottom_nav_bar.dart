@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../core/utils/app_strings.dart';
+
 class BottomNavBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onTap;
 
-  const BottomNavBar({super.key, 
+  const BottomNavBar({
+    super.key,
     required this.selectedIndex,
     required this.onTap,
   });
@@ -18,23 +21,23 @@ class BottomNavBar extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.bookmark),
-          label: 'Watchlist',
+          label: AppStrings.watchlist,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.receipt_long),
-          label: 'Orders',
+          label: AppStrings.orders,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.pie_chart),
-          label: 'Portfolio',
+          label: AppStrings.portfolio,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.trending_up),
-          label: 'Movers',
+          label: AppStrings.movers,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.widgets),
-          label: 'Products',
+          label: AppStrings.products,
         ),
       ],
     );

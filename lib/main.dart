@@ -20,17 +20,16 @@ void main() {
     MultiRepositoryProvider(
       providers: [
         RepositoryProvider<StockRepository>.value(value: stockRepository),
-        RepositoryProvider<WatchlistLocalDataSource>.value(value: watchlistLocalDataSource),
+        RepositoryProvider<WatchlistLocalDataSource>.value(
+          value: watchlistLocalDataSource,
+        ),
       ],
       child: BlocProvider(
         create: (context) => WatchlistBloc(
           stockRepository: stockRepository,
           localDataSource: watchlistLocalDataSource,
         )..add(LoadWatchlistsFromStorage()),
-        child: BlocProvider(
-        create: (_) => NavigationBloc(),
-          child: MyApp(),
-        ),
+        child: BlocProvider(create: (_) => NavigationBloc(), child: MyApp()),
       ),
     ),
   );

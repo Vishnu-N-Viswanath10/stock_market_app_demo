@@ -25,7 +25,8 @@ class SearchPage extends StatelessWidget {
       )..add(SearchQueryChanged('')),
       child: BlocBuilder<WatchlistBloc, WatchlistState>(
         builder: (context, watchlistState) {
-          final currentWatchlist = watchlistState.watchlists[watchlistState.selectedGroupIndex];
+          final currentWatchlist =
+              watchlistState.watchlists[watchlistState.selectedGroupIndex];
 
           return BlocBuilder<SearchBloc, SearchState>(
             builder: (context, searchState) {
@@ -52,31 +53,37 @@ class SearchPage extends StatelessWidget {
                   itemCount: searchState.results.length,
                   itemBuilder: (context, index) {
                     final stock = searchState.results[index];
-                    final inWatchlist = currentWatchlist.any((s) => s.code == stock.code);
+                    final inWatchlist = currentWatchlist.any(
+                      (s) => s.code == stock.code,
+                    );
 
                     return ListTile(
                       title: Text(stock.code),
                       subtitle: Text('${stock.name} • ${stock.exchange}'),
                       trailing: IconButton(
                         icon: Icon(
-                          inWatchlist ? Icons.check_circle : Icons.add_circle_outline,
+                          inWatchlist
+                              ? Icons.check_circle
+                              : Icons.add_circle_outline,
                           color: inWatchlist ? Colors.green : Colors.grey,
                         ),
                         onPressed: () {
                           if (inWatchlist) {
                             watchlistBloc.add(
-                              RemoveStockFromWatchlist(watchlistState.selectedGroupIndex, stock),
+                              RemoveStockFromWatchlist(
+                                watchlistState.selectedGroupIndex,
+                                stock,
+                              ),
                             );
                           } else {
                             // Check if watchlist is full
-                            if (currentWatchlist.length >= kMaxStocksPerWatchlist) {
+                            if (currentWatchlist.length >=
+                                kMaxStocksPerWatchlist) {
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   title: Text(AppStrings.watchlistFull),
-                                  content: Text(
-                                    AppStrings.watchlistFullAlert,
-                                  ),
+                                  content: Text(AppStrings.watchlistFullAlert),
                                   actions: [
                                     TextButton(
                                       onPressed: () => Navigator.pop(context),
@@ -87,7 +94,10 @@ class SearchPage extends StatelessWidget {
                               );
                             } else {
                               watchlistBloc.add(
-                                AddStockToWatchlist(watchlistState.selectedGroupIndex, stock),
+                                AddStockToWatchlist(
+                                  watchlistState.selectedGroupIndex,
+                                  stock,
+                                ),
                               );
                             }
                           }

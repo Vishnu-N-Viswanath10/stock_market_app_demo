@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_market_app_demo/core/utils/app_strings.dart';
 import '../bloc/navigation/navigation_bloc.dart';
 import '../bloc/navigation/navigation_event.dart';
 import '../bloc/navigation/navigation_state.dart';
@@ -11,28 +12,28 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   static final List<Widget> _pages = [
-  WatchlistPage(),
-  const TabPlaceholder(
-    title: 'Orders',
-    message: 'Your orders will appear here.',
-    icon: Icons.receipt_long,
-  ),
-  const TabPlaceholder(
-    title: 'Portfolio',
-    message: 'Your portfolio will appear here.',
-    icon: Icons.pie_chart,
-  ),
-  const TabPlaceholder(
-    title: 'Movers',
-    message: 'Market movers will appear here.',
-    icon: Icons.trending_up,
-  ),
-  const TabPlaceholder(
-    title: 'Products',
-    message: 'Your products will appear here.',
-    icon: Icons.widgets,
-  ),
-];
+    WatchlistPage(),
+    const TabPlaceholder(
+      title: AppStrings.orders,
+      message: AppStrings.ordersPlaceholder,
+      icon: Icons.receipt_long,
+    ),
+    const TabPlaceholder(
+      title: AppStrings.portfolio,
+      message: AppStrings.portfolioPlaceholder,
+      icon: Icons.pie_chart,
+    ),
+    const TabPlaceholder(
+      title: AppStrings.movers,
+      message: AppStrings.moversPlaceholder,
+      icon: Icons.trending_up,
+    ),
+    const TabPlaceholder(
+      title: AppStrings.products,
+      message: AppStrings.productsPlaceholder,
+      icon: Icons.widgets,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {

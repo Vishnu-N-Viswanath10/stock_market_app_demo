@@ -13,7 +13,7 @@ class EmptyWatchlistPlaceholder extends StatelessWidget {
           Icon(Icons.add_box_outlined, size: 80, color: Colors.grey[300]),
           SizedBox(height: 16),
           Text(
-           AppStrings.noStocksInWatchlist,
+            AppStrings.noStocksInWatchlist,
             style: TextStyle(color: Colors.grey, fontSize: 16),
           ),
           SizedBox(height: 8),

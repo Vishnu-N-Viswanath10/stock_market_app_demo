@@ -19,8 +19,8 @@ class ManageWatchlistsPage extends StatelessWidget {
             onReorder: (oldIndex, newIndex) {
               if (newIndex > oldIndex) newIndex -= 1;
               context.read<WatchlistBloc>().add(
-                    RearrangeWatchlists(oldIndex, newIndex),
-                  );
+                RearrangeWatchlists(oldIndex, newIndex),
+              );
             },
             children: [
               for (int i = 0; i < state.groupNames.length; i++)
@@ -38,7 +38,11 @@ class ManageWatchlistsPage extends StatelessWidget {
                     trailing: IconButton(
                       icon: Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
-                        _showDeleteConfirmation(context, i, state.groupNames[i]);
+                        _showDeleteConfirmation(
+                          context,
+                          i,
+                          state.groupNames[i],
+                        );
                       },
                     ),
                   ),
@@ -51,13 +55,11 @@ class ManageWatchlistsPage extends StatelessWidget {
   }
 
   void _showRenameDialog(BuildContext context, int index, String currentName) {
-     showDialog(
-    context: context,
-    builder: (context) => RenameWatchlistDialog(
-      index: index,
-      currentName: currentName,
-    ),
-  );
+    showDialog(
+      context: context,
+      builder: (context) =>
+          RenameWatchlistDialog(index: index, currentName: currentName),
+    );
   }
 
   void _showDeleteConfirmation(BuildContext context, int index, String name) {
@@ -86,9 +88,13 @@ class ManageWatchlistsPage extends StatelessWidget {
                   SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                      ),
                       onPressed: () {
-                        context.read<WatchlistBloc>().add(DeleteWatchlist(index));
+                        context.read<WatchlistBloc>().add(
+                          DeleteWatchlist(index),
+                        );
                         Navigator.pop(context);
                       },
                       child: Text(AppStrings.delete),

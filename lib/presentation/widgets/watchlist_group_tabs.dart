@@ -19,7 +19,9 @@ class WatchlistGroupTabs extends StatelessWidget {
               final isSelected = index == state.selectedGroupIndex;
               return GestureDetector(
                 onTap: () {
-                  context.read<WatchlistBloc>().add(SwitchWatchlistGroup(index));
+                  context.read<WatchlistBloc>().add(
+                    SwitchWatchlistGroup(index),
+                  );
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -32,7 +34,9 @@ class WatchlistGroupTabs extends StatelessWidget {
                     state.groupNames[index],
                     style: TextStyle(
                       color: isSelected ? Colors.white : Colors.black,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal,
                     ),
                   ),
                 ),

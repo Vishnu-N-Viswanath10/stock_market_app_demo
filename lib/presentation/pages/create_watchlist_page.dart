@@ -26,8 +26,8 @@ class CreateWatchlistPage extends StatelessWidget {
               onPressed: () {
                 if (_controller.text.trim().isNotEmpty) {
                   context.read<WatchlistBloc>().add(
-                        CreateNewWatchlistGroup(_controller.text.trim()),
-                      );
+                    CreateNewWatchlistGroup(_controller.text.trim()),
+                  );
                   Navigator.pop(context);
                 }
               },

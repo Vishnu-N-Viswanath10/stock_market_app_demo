@@ -3,17 +3,18 @@ import '../../../core/utils/app_strings.dart';
 import 'create_watchlist_event.dart';
 import 'create_watchlist_state.dart';
 
-class CreateWatchlistBloc extends Bloc<CreateWatchlistEvent, CreateWatchlistState> {
+class CreateWatchlistBloc
+    extends Bloc<CreateWatchlistEvent, CreateWatchlistState> {
   CreateWatchlistBloc() : super(CreateWatchlistInitial()) {
     on<CreateWatchlistSubmitted>((event, emit) {
-  if (event.currentCount >= 5) {
-    emit(CreateWatchlistFailure(AppStrings.maxWatchlists));
-  } else if (event.name.trim().isEmpty) {
-    emit(CreateWatchlistFailure(AppStrings.watchlistNameEmptyAlert));
-  } else {
-    emit(CreateWatchlistSuccess());
-  }
-});
+      if (event.currentCount >= 5) {
+        emit(CreateWatchlistFailure(AppStrings.maxWatchlists));
+      } else if (event.name.trim().isEmpty) {
+        emit(CreateWatchlistFailure(AppStrings.watchlistNameEmptyAlert));
+      } else {
+        emit(CreateWatchlistSuccess());
+      }
+    });
 
     on<CreateWatchlistErrorCleared>((event, emit) {
       emit(CreateWatchlistInitial());

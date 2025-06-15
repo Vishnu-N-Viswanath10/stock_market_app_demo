@@ -18,13 +18,13 @@ class WatchlistState {
   });
 
   factory WatchlistState.initial() => WatchlistState(
-        groupNames: ['NIFTY'],
-        watchlists: [[]],
-        selectedGroupIndex: 0,
-        isEditMode: false,
-        searchResults: [],
-        errorMessage: null,
-      );
+    groupNames: ['NIFTY'],
+    watchlists: [[]],
+    selectedGroupIndex: 0,
+    isEditMode: false,
+    searchResults: [],
+    errorMessage: null,
+  );
 
   WatchlistState copyWith({
     List<String>? groupNames,

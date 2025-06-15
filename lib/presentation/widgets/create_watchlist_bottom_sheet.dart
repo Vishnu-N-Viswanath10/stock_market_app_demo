@@ -8,13 +8,18 @@ import '../bloc/watchlist_state.dart';
 class CreateWatchlistBottomSheet extends StatefulWidget {
   final int currentWatchlistCount;
 
-  const CreateWatchlistBottomSheet({super.key, required this.currentWatchlistCount});
+  const CreateWatchlistBottomSheet({
+    super.key,
+    required this.currentWatchlistCount,
+  });
 
   @override
-  State<CreateWatchlistBottomSheet> createState() => _CreateWatchlistBottomSheetState();
+  State<CreateWatchlistBottomSheet> createState() =>
+      _CreateWatchlistBottomSheetState();
 }
 
-class _CreateWatchlistBottomSheetState extends State<CreateWatchlistBottomSheet> {
+class _CreateWatchlistBottomSheetState
+    extends State<CreateWatchlistBottomSheet> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   int? _prevWatchlistCount;
@@ -47,10 +52,12 @@ class _CreateWatchlistBottomSheetState extends State<CreateWatchlistBottomSheet>
   @override
   Widget build(BuildContext context) {
     return BlocListener<WatchlistBloc, WatchlistState>(
-      listenWhen: (prev, curr) => prev.groupNames.length != curr.groupNames.length,
+      listenWhen: (prev, curr) =>
+          prev.groupNames.length != curr.groupNames.length,
       listener: (context, state) {
         // Only close the sheet if a new watchlist was actually added
-        if (_prevWatchlistCount != null && state.groupNames.length > _prevWatchlistCount!) {
+        if (_prevWatchlistCount != null &&
+            state.groupNames.length > _prevWatchlistCount!) {
           Navigator.pop(context);
         }
       },
@@ -98,26 +105,27 @@ class _CreateWatchlistBottomSheetState extends State<CreateWatchlistBottomSheet>
                     onPressed: isMax
                         ? () {
                             context.read<WatchlistBloc>().add(
-                                  ShowWatchlistNameExistsError(
-                                    AppStrings.maxWatchlists,
-                                  ),
-                                );
+                              ShowWatchlistNameExistsError(
+                                AppStrings.maxWatchlists,
+                              ),
+                            );
                           }
                         : () => _handleCreate(context),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isMax ? Colors.grey : Theme.of(context).primaryColor,
+                      backgroundColor: isMax
+                          ? Colors.grey
+                          : Theme.of(context).primaryColor,
                     ),
-                    child: Text(AppStrings.create,
-                    style: TextStyle(color: Colors.white)),
+                    child: Text(
+                      AppStrings.create,
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
                 if (errorText != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
-                      errorText,
-                      style: TextStyle(color: Colors.red),
-                    ),
+                    child: Text(errorText, style: TextStyle(color: Colors.red)),
                   ),
                 SizedBox(height: 16),
               ],

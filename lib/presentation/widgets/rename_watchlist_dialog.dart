@@ -71,9 +71,7 @@ class _RenameWatchlistDialogState extends State<RenameWatchlistDialog> {
                 TextField(
                   controller: _controller,
                   focusNode: _focusNode,
-                  decoration: InputDecoration(
-                    labelText: AppStrings.newName,
-                  ),
+                  decoration: InputDecoration(labelText: AppStrings.newName),
                   autofocus: true,
                   onChanged: (_) {
                     if (errorText != null) {
@@ -85,10 +83,7 @@ class _RenameWatchlistDialogState extends State<RenameWatchlistDialog> {
                 if (errorText != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
-                      errorText,
-                      style: TextStyle(color: Colors.red),
-                    ),
+                    child: Text(errorText, style: TextStyle(color: Colors.red)),
                   ),
               ],
             ),

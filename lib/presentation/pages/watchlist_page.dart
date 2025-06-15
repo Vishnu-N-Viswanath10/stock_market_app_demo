@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/app_strings.dart';
@@ -22,7 +21,7 @@ class WatchlistPage extends StatelessWidget {
         final stocks = state.watchlists[state.selectedGroupIndex];
         return Scaffold(
           appBar: AppBar(
-            title: Text('Watchlist'),
+            title: Text(AppStrings.watchlist),
             backgroundColor: Colors.white,
             elevation: 0,
           ),
@@ -33,34 +32,39 @@ class WatchlistPage extends StatelessWidget {
                 children: [
                   Expanded(child: WatchlistGroupTabs()),
                   IconButton(
-  icon: Icon(Icons.menu),
-  onPressed: () => _showWatchlistMenu(
-    context,
-    state.groupNames.length,
-    () {
-      // onEdit callback
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => EditWatchlistPage()),
-      );
-    },
-    () {
-      // onCreate callback
-      showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        builder: (context) => CreateWatchlistBottomSheet(
-          currentWatchlistCount: state.groupNames.length,
-        ),
-      );
-    },
-  ),
-),
+                    icon: Icon(Icons.menu),
+                    onPressed: () => _showWatchlistMenu(
+                      context,
+                      state.groupNames.length,
+                      () {
+                        // onEdit callback
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => EditWatchlistPage(),
+                          ),
+                        );
+                      },
+                      () {
+                        // onCreate callback
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (context) => CreateWatchlistBottomSheet(
+                            currentWatchlistCount: state.groupNames.length,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
               // Search bar
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -124,16 +128,21 @@ class WatchlistPage extends StatelessWidget {
     );
   }
 
-  void _showWatchlistMenu(BuildContext context, int watchlistCount, VoidCallback onEdit, VoidCallback onCreate) {
-  showModalBottomSheet(
-    context: context,
-    builder: (context) {
-      return WatchlistMenuSheet(
-        watchlistCount: watchlistCount,
-        onEdit: onEdit,
-        onCreate: onCreate,
-      );
-    },
-   );
- }
+  void _showWatchlistMenu(
+    BuildContext context,
+    int watchlistCount,
+    VoidCallback onEdit,
+    VoidCallback onCreate,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return WatchlistMenuSheet(
+          watchlistCount: watchlistCount,
+          onEdit: onEdit,
+          onCreate: onCreate,
+        );
+      },
+    );
+  }
 }

@@ -29,12 +29,12 @@ class EditWatchlistPage extends StatelessWidget {
             onReorder: (oldIndex, newIndex) {
               if (newIndex > oldIndex) newIndex -= 1;
               context.read<WatchlistBloc>().add(
-                    RearrangeStocksInWatchlist(
-                      state.selectedGroupIndex,
-                      oldIndex,
-                      newIndex,
-                    ),
-                  );
+                RearrangeStocksInWatchlist(
+                  state.selectedGroupIndex,
+                  oldIndex,
+                  newIndex,
+                ),
+              );
             },
             children: [
               for (int i = 0; i < stocks.length; i++)
@@ -43,11 +43,11 @@ class EditWatchlistPage extends StatelessWidget {
                   direction: DismissDirection.endToStart,
                   onDismissed: (_) {
                     context.read<WatchlistBloc>().add(
-                          RemoveStockFromWatchlist(
-                            state.selectedGroupIndex,
-                            stocks[i],
-                          ),
-                        );
+                      RemoveStockFromWatchlist(
+                        state.selectedGroupIndex,
+                        stocks[i],
+                      ),
+                    );
                   },
                   background: Container(
                     color: Colors.red,
