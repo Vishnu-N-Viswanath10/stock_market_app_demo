@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/app_strings.dart';
-import '../bloc/watchlist_bloc.dart';
-import '../bloc/watchlist_state.dart';
+import '../bloc/watchlist/watchlist_bloc.dart';
+import '../bloc/watchlist/watchlist_state.dart';
 import '../widgets/watchlist_group_tabs.dart';
 import '../widgets/stock_tile.dart';
 import '../widgets/empty_watchlist_placeholder.dart';

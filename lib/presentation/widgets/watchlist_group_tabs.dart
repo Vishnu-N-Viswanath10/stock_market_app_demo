@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/constants.dart';
-import '../bloc/watchlist_bloc.dart';
-import '../bloc/watchlist_event.dart';
-import '../bloc/watchlist_state.dart';
+import '../bloc/watchlist/watchlist_bloc.dart';
+import '../bloc/watchlist/watchlist_event.dart';
+import '../bloc/watchlist/watchlist_state.dart';
 
 class WatchlistGroupTabs extends StatelessWidget {
   const WatchlistGroupTabs({super.key});

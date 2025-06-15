@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_market_app_demo/core/utils/app_strings.dart';
-import '../bloc/watchlist_bloc.dart';
-import '../bloc/watchlist_event.dart';
-import '../bloc/watchlist_state.dart';
+import '../bloc/watchlist/watchlist_bloc.dart';
+import '../bloc/watchlist/watchlist_event.dart';
+import '../bloc/watchlist/watchlist_state.dart';
 
 class RenameWatchlistDialog extends StatefulWidget {
   final int index;
@@ -94,7 +94,7 @@ class _RenameWatchlistDialogState extends State<RenameWatchlistDialog> {
               ),
               TextButton(
                 onPressed: () => _handleRename(context),
-                child: Text(AppStrings.cancel),
+                child: Text(AppStrings.rename),
               ),
             ],
           );

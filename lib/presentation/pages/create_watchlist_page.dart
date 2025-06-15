@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/app_strings.dart';
-import '../bloc/watchlist_bloc.dart';
-import '../bloc/watchlist_event.dart';
+import '../bloc/watchlist/watchlist_bloc.dart';
+import '../bloc/watchlist/watchlist_event.dart';
 
 class CreateWatchlistPage extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();

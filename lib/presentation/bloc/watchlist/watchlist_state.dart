@@ -1,4 +1,4 @@
-import '../../domain/entities/stock.dart';
+import '../../../domain/entities/stock.dart';
 
 class WatchlistState {
   final List<String> groupNames;

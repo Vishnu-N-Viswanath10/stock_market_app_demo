@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_market_app_demo/core/utils/app_strings.dart';
-import '../../core/utils/constants.dart';
-import '../../data/datasources/watchlist_local_data_source.dart';
-import '../../data/models/stock_model.dart';
-import '../../domain/entities/stock.dart';
-import '../../domain/repositories/stock_repository.dart';
+import '../../../core/utils/constants.dart';
+import '../../../data/datasources/watchlist_local_data_source.dart';
+import '../../../data/models/stock_model.dart';
+import '../../../domain/entities/stock.dart';
+import '../../../domain/repositories/stock_repository.dart';
 import 'watchlist_event.dart';
 import 'watchlist_state.dart';
 

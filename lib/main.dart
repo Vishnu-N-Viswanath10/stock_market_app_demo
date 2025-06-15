@@ -5,8 +5,8 @@ import 'data/datasources/mock_stock_data_source.dart';
 import 'data/datasources/watchlist_local_data_source.dart';
 import 'data/repositories/stock_repository_impl.dart';
 import 'domain/repositories/stock_repository.dart';
-import 'presentation/bloc/watchlist_bloc.dart';
-import 'presentation/bloc/watchlist_event.dart';
+import 'presentation/bloc/watchlist/watchlist_bloc.dart';
+import 'presentation/bloc/watchlist/watchlist_event.dart';
 import 'presentation/pages/home_page.dart';
 import 'presentation/bloc/navigation/navigation_bloc.dart';
 
