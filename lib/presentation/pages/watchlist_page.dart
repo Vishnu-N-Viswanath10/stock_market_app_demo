@@ -4,9 +4,10 @@ import '../../core/utils/app_strings.dart';
 import '../bloc/watchlist/watchlist_bloc.dart';
 import '../bloc/watchlist/watchlist_event.dart';
 import '../bloc/watchlist/watchlist_state.dart';
-import '../widgets/watchlist_group_tabs.dart';
-import '../widgets/stock_tile.dart';
 import '../widgets/empty_watchlist_placeholder.dart';
+import '../widgets/stock_tile.dart';
+import '../widgets/watchlist_group_tabs.dart';
+import '../widgets/watchlist_list_footer.dart';
 import '../widgets/watchlist_search_bar.dart';
 import 'edit_watchlist_page.dart';
 import '../widgets/create_watchlist_bottom_sheet.dart';
@@ -26,81 +27,79 @@ class WatchlistPage extends StatelessWidget {
             backgroundColor: Theme.of(context).secondaryHeaderColor,
             elevation: 0,
           ),
-          body: Column(
+          body: Stack(
             children: [
-              // Watchlist group tabs and hamburger
-              Row(
+              Column(
                 children: [
-                  Expanded(child: WatchlistGroupTabs()),
-                  IconButton(
-                    icon: const Icon(Icons.menu),
-                    onPressed: () => _showWatchlistMenu(
-                      context,
-                      state.groupNames.length,
-                      () {
-                        // onEdit callback
-                        Navigator.push(
+                  Row(
+                    children: [
+                      Expanded(child: WatchlistGroupTabs()),
+                      IconButton(
+                        icon: const Icon(Icons.menu),
+                        onPressed: () => _showWatchlistMenu(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => EditWatchlistPage(),
+                          state.groupNames.length,
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => EditWatchlistPage(),
+                              ),
+                            );
+                          },
+                          () {
+                            context.read<WatchlistBloc>().add(
+                              WatchlistNameChanged(''),
+                            );
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Theme.of(
+                                context,
+                              ).secondaryHeaderColor,
+                              builder: (context) => CreateWatchlistBottomSheet(
+                                currentWatchlistCount: state.groupNames.length,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const WatchlistSearchBar(),
+                  Expanded(
+                    child: stocks.isEmpty
+                        ? const EmptyWatchlistPlaceholder()
+                        : ListView.separated(
+                            itemCount: stocks.length,
+                            itemBuilder: (context, index) {
+                              final stock = stocks[index];
+                              return GestureDetector(
+                                onLongPress: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => EditWatchlistPage(),
+                                    ),
+                                  );
+                                },
+                                child: StockTile(stock: stock),
+                              );
+                            },
+                            separatorBuilder: (context, index) => const Divider(
+                              height: 1,
+                              thickness: 1,
+                              color: Colors.black12,
+                            ),
                           ),
-                        );
-                      },
-                      () {
-                        // onCreate callback
-                        context.read<WatchlistBloc>().add(
-                          WatchlistNameChanged(''),
-                        );
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Theme.of(
-                            context,
-                          ).secondaryHeaderColor,
-                          builder: (context) => CreateWatchlistBottomSheet(
-                            currentWatchlistCount: state.groupNames.length,
-                          ),
-                        );
-                      },
-                    ),
                   ),
                 ],
               ),
-              // Search bar
-              const WatchlistSearchBar(),
-              // Watchlist stocks
-              Expanded(
-                child: stocks.isEmpty
-                    ? EmptyWatchlistPlaceholder()
-                    : ListView.separated(
-                        itemCount: stocks.length,
-                        itemBuilder: (context, index) {
-                          final stock = stocks[index];
-                          return GestureDetector(
-                            onLongPress: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => EditWatchlistPage(),
-                                ),
-                              );
-                            },
-                            child: StockTile(stock: stock),
-                          );
-                        },
-                        separatorBuilder: (context, index) => const Divider(
-                          height: 1,
-                          thickness: 1,
-                          color: Colors.black12,
-                        ),
-                      ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '${stocks.length} / 20 Stocks',
-                  style: TextStyle(color: Colors.grey),
-                ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 16,
+                child: Center(child: WatchlistFooter(count: stocks.length)),
               ),
             ],
           ),
