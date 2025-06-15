@@ -21,7 +21,7 @@ class TabPlaceholder extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 80, color: Colors.grey[300]),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Text(
               message,
               style: TextStyle(fontSize: 18, color: Colors.grey[600]),

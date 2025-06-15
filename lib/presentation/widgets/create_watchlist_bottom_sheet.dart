@@ -90,11 +90,11 @@ class _CreateWatchlistBottomSheetState
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   AppStrings.createNewWatchlist,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextField(
                   controller: _controller,
                   focusNode: _focusNode,
@@ -128,7 +128,7 @@ class _CreateWatchlistBottomSheetState
                     ),
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -146,7 +146,7 @@ class _CreateWatchlistBottomSheetState
                           ? Colors.grey
                           : Theme.of(context).primaryColor,
                     ),
-                    child: Text(
+                    child: const Text(
                       AppStrings.create,
                       style: TextStyle(color: Colors.white),
                     ),
@@ -157,7 +157,7 @@ class _CreateWatchlistBottomSheetState
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(errorText, style: TextStyle(color: Colors.red)),
                   ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
               ],
             ),
           );

@@ -21,7 +21,7 @@ class CreateWatchlistPage extends StatelessWidget {
               controller: _controller,
               decoration: InputDecoration(labelText: AppStrings.watchlistName),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 if (_controller.text.trim().isNotEmpty) {
@@ -31,7 +31,7 @@ class CreateWatchlistPage extends StatelessWidget {
                   Navigator.pop(context);
                 }
               },
-              child: Text(AppStrings.create),
+              child: const Text(AppStrings.create),
             ),
           ],
         ),

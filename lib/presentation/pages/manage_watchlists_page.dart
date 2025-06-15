@@ -76,7 +76,7 @@ class ManageWatchlistsPage extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Row(
                 children: [
                   Expanded(
@@ -85,7 +85,7 @@ class ManageWatchlistsPage extends StatelessWidget {
                       child: Text(AppStrings.cancel),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(

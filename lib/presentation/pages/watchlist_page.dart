@@ -21,7 +21,7 @@ class WatchlistPage extends StatelessWidget {
         final stocks = state.watchlists[state.selectedGroupIndex];
         return Scaffold(
           appBar: AppBar(
-            title: Text(AppStrings.watchlist),
+            title: const Text(AppStrings.watchlist),
             backgroundColor: Colors.white,
             elevation: 0,
           ),
@@ -32,7 +32,7 @@ class WatchlistPage extends StatelessWidget {
                 children: [
                   Expanded(child: WatchlistGroupTabs()),
                   IconButton(
-                    icon: Icon(Icons.menu),
+                    icon: const Icon(Icons.menu),
                     onPressed: () => _showWatchlistMenu(
                       context,
                       state.groupNames.length,
@@ -80,9 +80,9 @@ class WatchlistPage extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        SizedBox(width: 8),
-                        Icon(Icons.search, color: Colors.grey),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
+                        const Icon(Icons.search, color: Colors.grey),
+                        const SizedBox(width: 8),
                         Text(
                           AppStrings.createNewWatchlist,
                           style: TextStyle(color: Colors.grey),
