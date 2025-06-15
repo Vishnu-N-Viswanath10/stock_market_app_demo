@@ -10,14 +10,14 @@ class EmptyWatchlistPlaceholder extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.add_box_outlined, size: 80, color: Colors.grey[300]),
+          const Icon(Icons.add_box_outlined, size: 80, color: Colors.grey),
           const SizedBox(height: 16),
-          Text(
+          const Text(
             AppStrings.noStocksInWatchlist,
             style: TextStyle(color: Colors.grey, fontSize: 16),
           ),
           const SizedBox(height: 8),
-          Text(
+          const Text(
             AppStrings.tapToAddStocks,
             style: TextStyle(color: Colors.grey, fontSize: 14),
           ),

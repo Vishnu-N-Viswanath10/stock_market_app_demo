@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/app_strings.dart';
 import '../bloc/watchlist/watchlist_bloc.dart';
+import '../bloc/watchlist/watchlist_event.dart';
 import '../bloc/watchlist/watchlist_state.dart';
 import '../widgets/watchlist_group_tabs.dart';
 import '../widgets/stock_tile.dart';
@@ -47,6 +48,7 @@ class WatchlistPage extends StatelessWidget {
                       },
                       () {
                         // onCreate callback
+                        context.read<WatchlistBloc>().add(WatchlistNameChanged(''));
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
@@ -83,7 +85,7 @@ class WatchlistPage extends StatelessWidget {
                         const SizedBox(width: 8),
                         const Icon(Icons.search, color: Colors.grey),
                         const SizedBox(width: 8),
-                        Text(
+                        const Text(
                           AppStrings.createNewWatchlist,
                           style: TextStyle(color: Colors.grey),
                         ),

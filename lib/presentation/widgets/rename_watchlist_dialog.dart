@@ -79,7 +79,7 @@ class _RenameWatchlistDialogState extends State<RenameWatchlistDialog> {
             );
           }
           return AlertDialog(
-            title: Text(AppStrings.renameWatchlist),
+            title: const Text(AppStrings.renameWatchlist),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -88,7 +88,7 @@ class _RenameWatchlistDialogState extends State<RenameWatchlistDialog> {
                   focusNode: _focusNode,
                   maxLength: 20,
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: AppStrings.newName,
                     counterText: '',
                   ),
@@ -123,11 +123,11 @@ class _RenameWatchlistDialogState extends State<RenameWatchlistDialog> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(AppStrings.cancel),
+                child: const Text(AppStrings.cancel),
               ),
               TextButton(
                 onPressed: () => _handleRename(context, state),
-                child: Text(AppStrings.rename),
+                child: const Text(AppStrings.rename),
               ),
             ],
           );

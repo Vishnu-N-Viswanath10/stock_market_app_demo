@@ -27,7 +27,6 @@ class SearchPage extends StatelessWidget {
         builder: (context, watchlistState) {
           final currentWatchlist =
               watchlistState.watchlists[watchlistState.selectedGroupIndex];
-
           return BlocBuilder<SearchBloc, SearchState>(
             builder: (context, searchState) {
               return Scaffold(
@@ -87,7 +86,7 @@ class SearchPage extends StatelessWidget {
                                   actions: [
                                     TextButton(
                                       onPressed: () => Navigator.pop(context),
-                                      child: Text(AppStrings.ok),
+                                      child: const Text(AppStrings.ok),
                                     ),
                                   ],
                                 ),

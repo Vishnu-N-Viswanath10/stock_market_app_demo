@@ -24,8 +24,14 @@ class WatchlistGroupTabs extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 8,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: isSelected ? kPrimaryColor : Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),

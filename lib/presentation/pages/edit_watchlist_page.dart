@@ -18,7 +18,7 @@ class EditWatchlistPage extends StatelessWidget {
             title: Text(AppStrings.editWatchlist),
             actions: [
               IconButton(
-                icon: Icon(Icons.check, color: Colors.green),
+                icon: const Icon(Icons.check, color: Colors.green),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -52,8 +52,8 @@ class EditWatchlistPage extends StatelessWidget {
                   background: Container(
                     color: Colors.red,
                     alignment: Alignment.centerRight,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Icon(Icons.delete, color: Colors.white),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Icon(Icons.delete, color: Colors.white),
                   ),
                   child: ListTile(
                     key: ValueKey(stocks[i].code),

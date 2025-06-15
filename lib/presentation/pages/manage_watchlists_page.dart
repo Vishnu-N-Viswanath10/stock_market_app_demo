@@ -97,7 +97,7 @@ class ManageWatchlistsPage extends StatelessWidget {
                         );
                         Navigator.pop(context);
                       },
-                      child: Text(AppStrings.delete),
+                      child:const Text(AppStrings.delete),
                     ),
                   ),
                 ],

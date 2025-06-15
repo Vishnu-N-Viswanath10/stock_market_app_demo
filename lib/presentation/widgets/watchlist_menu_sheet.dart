@@ -25,8 +25,8 @@ class WatchlistMenuSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.create_new_folder),
-              title: Text(AppStrings.createNewWatchlist),
+              leading: const Icon(Icons.create_new_folder),
+              title: const Text(AppStrings.createNewWatchlist),
               trailing: Text(
                 '$watchlistCount/5',
                 style: TextStyle(
@@ -43,16 +43,16 @@ class WatchlistMenuSheet extends StatelessWidget {
                   : null,
             ),
             ListTile(
-              leading: Icon(Icons.edit),
-              title: Text(AppStrings.editCurrentWatchlist),
+              leading: const Icon(Icons.edit),
+              title: const Text(AppStrings.editCurrentWatchlist),
               onTap: () {
                 Navigator.pop(context);
                 onEdit();
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text(AppStrings.manageWatchlists),
+              leading: const Icon(Icons.settings),
+              title: const Text(AppStrings.manageWatchlists),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
