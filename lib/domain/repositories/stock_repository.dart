@@ -1,5 +1,5 @@
 import '../entities/stock.dart';
 
 abstract class StockRepository {
-  List<Stock> getAllStocks();
+  Future<List<Stock>> getAllStocks();
 }

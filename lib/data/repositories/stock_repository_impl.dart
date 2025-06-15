@@ -8,7 +8,7 @@ class StockRepositoryImpl implements StockRepository {
   StockRepositoryImpl(this.dataSource);
 
   @override
-  List<Stock> getAllStocks() {
+  Future<List<Stock>> getAllStocks() {
     return dataSource.getAllStocks();
   }
 }

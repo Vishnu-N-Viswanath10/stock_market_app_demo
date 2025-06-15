@@ -10,8 +10,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   SearchBloc({required this.stockRepository, required this.defaultStocks})
     : super(SearchState.initial(defaultStocks)) {
-    on<SearchQueryChanged>((event, emit) {
-      final allStocks = stockRepository.getAllStocks();
+    on<SearchQueryChanged>((event, emit) async {
+      final allStocks = await stockRepository.getAllStocks();
       final results = event.query.isEmpty
           ? defaultStocks
           : allStocks
