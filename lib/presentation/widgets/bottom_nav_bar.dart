@@ -18,6 +18,7 @@ class BottomNavBar extends StatelessWidget {
       currentIndex: selectedIndex,
       onTap: onTap,
       type: BottomNavigationBarType.fixed,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.bookmark),

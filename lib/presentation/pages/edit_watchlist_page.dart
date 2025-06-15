@@ -38,29 +38,41 @@ class EditWatchlistPage extends StatelessWidget {
             },
             children: [
               for (int i = 0; i < stocks.length; i++)
-                Dismissible(
+                Column(
                   key: ValueKey(stocks[i].code),
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (_) {
-                    context.read<WatchlistBloc>().add(
-                      RemoveStockFromWatchlist(
-                        state.selectedGroupIndex,
-                        stocks[i],
+                  children: [
+                    Dismissible(
+                      key: ValueKey('dismiss_${stocks[i].code}'),
+                      direction: DismissDirection.endToStart,
+                      onDismissed: (_) {
+                        context.read<WatchlistBloc>().add(
+                          RemoveStockFromWatchlist(
+                            state.selectedGroupIndex,
+                            stocks[i],
+                          ),
+                        );
+                      },
+                      background: Container(
+                        color: Colors.red,
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Icon(Icons.delete, color: Colors.white),
                       ),
-                    );
-                  },
-                  background: Container(
-                    color: Colors.red,
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Icon(Icons.delete, color: Colors.white),
-                  ),
-                  child: ListTile(
-                    key: ValueKey(stocks[i].code),
-                    title: Text(stocks[i].code),
-                    subtitle: Text('${stocks[i].name} • ${stocks[i].exchange}'),
-                    trailing: Icon(Icons.drag_handle),
-                  ),
+                      child: ListTile(
+                        title: Text(stocks[i].code),
+                        subtitle: Text(
+                          '${stocks[i].name} • ${stocks[i].exchange}',
+                        ),
+                        trailing: const Icon(Icons.drag_handle),
+                      ),
+                    ),
+                    if (i < stocks.length - 1)
+                      const Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Colors.black12,
+                      ),
+                  ],
                 ),
             ],
           ),

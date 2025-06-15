@@ -48,7 +48,7 @@ class SearchPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                body: ListView.builder(
+                body: ListView.separated(
                   itemCount: searchState.results.length,
                   itemBuilder: (context, index) {
                     final stock = searchState.results[index];
@@ -104,6 +104,11 @@ class SearchPage extends StatelessWidget {
                       ),
                     );
                   },
+                  separatorBuilder: (context, index) => const Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Colors.black12, // light grey, adjust as needed
+                  ),
                 ),
               );
             },

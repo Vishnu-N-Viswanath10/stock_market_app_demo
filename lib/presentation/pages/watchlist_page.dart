@@ -23,7 +23,7 @@ class WatchlistPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text(AppStrings.watchlist),
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).secondaryHeaderColor,
             elevation: 0,
           ),
           body: Column(
@@ -48,7 +48,9 @@ class WatchlistPage extends StatelessWidget {
                       },
                       () {
                         // onCreate callback
-                        context.read<WatchlistBloc>().add(WatchlistNameChanged(''));
+                        context.read<WatchlistBloc>().add(
+                          WatchlistNameChanged(''),
+                        );
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
@@ -98,7 +100,7 @@ class WatchlistPage extends StatelessWidget {
               Expanded(
                 child: stocks.isEmpty
                     ? EmptyWatchlistPlaceholder()
-                    : ListView.builder(
+                    : ListView.separated(
                         itemCount: stocks.length,
                         itemBuilder: (context, index) {
                           final stock = stocks[index];
@@ -114,6 +116,11 @@ class WatchlistPage extends StatelessWidget {
                             child: StockTile(stock: stock),
                           );
                         },
+                        separatorBuilder: (context, index) => const Divider(
+                          height: 1,
+                          thickness: 1,
+                          color: Colors.black12,
+                        ),
                       ),
               ),
               Padding(
