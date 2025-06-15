@@ -15,7 +15,7 @@ class EditWatchlistPage extends StatelessWidget {
         final stocks = state.watchlists[state.selectedGroupIndex];
         return Scaffold(
           appBar: AppBar(
-            title: Text(AppStrings.editWatchlist),
+            title: const Text(AppStrings.editWatchlist),
             backgroundColor: Theme.of(context).secondaryHeaderColor,
             actions: [
               IconButton(

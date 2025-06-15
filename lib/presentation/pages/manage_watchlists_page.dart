@@ -16,7 +16,7 @@ class ManageWatchlistsPage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(AppStrings.manageWatchlists),
+            title: const Text(AppStrings.manageWatchlists),
             backgroundColor: Theme.of(context).secondaryHeaderColor,
           ),
           body: ReorderableListView(
@@ -36,14 +36,14 @@ class ManageWatchlistsPage extends StatelessWidget {
                       direction: DismissDirection.none,
                       child: ListTile(
                         leading: IconButton(
-                          icon: Icon(Icons.edit),
+                          icon: const Icon(Icons.edit),
                           onPressed: () {
                             _showRenameDialog(context, i, state.groupNames[i]);
                           },
                         ),
                         title: Text(state.groupNames[i]),
                         trailing: IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
+                          icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
                             _showDeleteConfirmation(
                               context,
