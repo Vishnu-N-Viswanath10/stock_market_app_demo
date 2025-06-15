@@ -170,6 +170,10 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
     on<ClearWatchlistError>((event, emit) {
       emit(state.copyWith(errorMessage: null));
     });
+
+    on<WatchlistNameChanged>((event, emit) {
+      emit(state.copyWith(watchlistName: event.name, errorMessage: null));
+    });
   }
 
   Future<void> _onLoadWatchlistsFromStorage(

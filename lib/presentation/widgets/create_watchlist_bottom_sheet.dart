@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/app_strings.dart';
 import '../bloc/watchlist/watchlist_bloc.dart';
@@ -20,16 +21,16 @@ class CreateWatchlistBottomSheet extends StatefulWidget {
 
 class _CreateWatchlistBottomSheetState
     extends State<CreateWatchlistBottomSheet> {
-  final TextEditingController _controller = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-  int? _prevWatchlistCount;
+  late final TextEditingController _controller;
+  late final FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
-    _prevWatchlistCount = widget.currentWatchlistCount;
+    _controller = TextEditingController();
+    _focusNode = FocusNode();
     // Show keyboard automatically when the bottom sheet opens
-    Future.delayed(Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       if (mounted) {
         FocusScope.of(context).requestFocus(_focusNode);
       }
@@ -43,10 +44,15 @@ class _CreateWatchlistBottomSheetState
     super.dispose();
   }
 
-  void _handleCreate(BuildContext context) {
-    context.read<WatchlistBloc>().add(
-      CreateNewWatchlistGroup(_controller.text.trim()),
-    );
+  void _handleCreate(BuildContext context, WatchlistState state) {
+    final name = state.watchlistName.trim();
+    if (name.isEmpty) {
+      context.read<WatchlistBloc>().add(
+        ShowWatchlistNameExistsError(AppStrings.watchlistNameEmptyAlert),
+      );
+      return;
+    }
+    context.read<WatchlistBloc>().add(CreateNewWatchlistGroup(name));
   }
 
   @override
@@ -55,9 +61,8 @@ class _CreateWatchlistBottomSheetState
       listenWhen: (prev, curr) =>
           prev.groupNames.length != curr.groupNames.length,
       listener: (context, state) {
-        // Only close the sheet if a new watchlist was actually added
-        if (_prevWatchlistCount != null &&
-            state.groupNames.length > _prevWatchlistCount!) {
+        // Close the sheet if a new watchlist was added
+        if (state.groupNames.length > widget.currentWatchlistCount) {
           Navigator.pop(context);
         }
       },
@@ -65,6 +70,15 @@ class _CreateWatchlistBottomSheetState
         builder: (context, state) {
           final isMax = widget.currentWatchlistCount >= 5;
           final errorText = state.errorMessage;
+          final name = state.watchlistName;
+
+          // Keep the controller in sync with the bloc state
+          if (_controller.text != name) {
+            _controller.value = TextEditingValue(
+              text: name,
+              selection: TextSelection.collapsed(offset: name.length),
+            );
+          }
 
           return Padding(
             padding: EdgeInsets.only(
@@ -84,21 +98,37 @@ class _CreateWatchlistBottomSheetState
                 TextField(
                   controller: _controller,
                   focusNode: _focusNode,
+                  maxLength: 20,
+                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
                   decoration: InputDecoration(
                     labelText: AppStrings.watchlistName,
+                    counterText: '', // Hide default counter
                   ),
                   enabled: !isMax,
                   autofocus: true,
-                  onChanged: (_) {
-                    if (errorText != null) {
+                  onChanged: (val) {
+                    context.read<WatchlistBloc>().add(
+                      WatchlistNameChanged(val),
+                    );
+                    if (state.errorMessage != null) {
                       context.read<WatchlistBloc>().add(ClearWatchlistError());
                     }
                   },
                   onSubmitted: (_) {
-                    if (!isMax) _handleCreate(context);
+                    if (!isMax) _handleCreate(context, state);
                   },
                 ),
-                SizedBox(height: 16),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    '${name.length}/20',
+                    style: TextStyle(
+                      color: name.length > 20 ? Colors.red : Colors.grey,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -110,7 +140,7 @@ class _CreateWatchlistBottomSheetState
                               ),
                             );
                           }
-                        : () => _handleCreate(context),
+                        : () => _handleCreate(context, state),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isMax
                           ? Colors.grey

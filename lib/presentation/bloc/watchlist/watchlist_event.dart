@@ -66,3 +66,8 @@ class ShowWatchlistNameExistsError extends WatchlistEvent {
 }
 
 class ClearWatchlistError extends WatchlistEvent {}
+
+class WatchlistNameChanged extends WatchlistEvent {
+  final String name;
+  WatchlistNameChanged(this.name);
+}

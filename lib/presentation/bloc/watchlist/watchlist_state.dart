@@ -7,6 +7,7 @@ class WatchlistState {
   final bool isEditMode;
   final List<Stock> searchResults;
   final String? errorMessage;
+  final String watchlistName;
 
   WatchlistState({
     required this.groupNames,
@@ -15,6 +16,7 @@ class WatchlistState {
     required this.isEditMode,
     required this.searchResults,
     this.errorMessage,
+    required this.watchlistName,
   });
 
   factory WatchlistState.initial() => WatchlistState(
@@ -24,6 +26,7 @@ class WatchlistState {
     isEditMode: false,
     searchResults: [],
     errorMessage: null,
+    watchlistName: '',
   );
 
   WatchlistState copyWith({
@@ -33,6 +36,7 @@ class WatchlistState {
     bool? isEditMode,
     List<Stock>? searchResults,
     String? errorMessage,
+    String? watchlistName,
   }) {
     return WatchlistState(
       groupNames: groupNames ?? this.groupNames,
@@ -41,6 +45,7 @@ class WatchlistState {
       isEditMode: isEditMode ?? this.isEditMode,
       searchResults: searchResults ?? this.searchResults,
       errorMessage: errorMessage,
+      watchlistName: watchlistName ?? this.watchlistName,
     );
   }
 }
