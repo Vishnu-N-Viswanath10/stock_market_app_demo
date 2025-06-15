@@ -41,9 +41,10 @@ class SearchPage extends StatelessWidget {
                       context.read<SearchBloc>().add(SearchQueryChanged(val));
                     },
                   ),
+                  backgroundColor: Theme.of(context).secondaryHeaderColor,
                   actions: [
                     IconButton(
-                      icon: Icon(Icons.close),
+                      icon: const Icon(Icons.close),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ],
@@ -107,7 +108,7 @@ class SearchPage extends StatelessWidget {
                   separatorBuilder: (context, index) => const Divider(
                     height: 1,
                     thickness: 1,
-                    color: Colors.black12, // light grey, adjust as needed
+                    color: Colors.black12,
                   ),
                 ),
               );

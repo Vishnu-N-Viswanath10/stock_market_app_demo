@@ -27,28 +27,39 @@ class ManageWatchlistsPage extends StatelessWidget {
             },
             children: [
               for (int i = 0; i < state.groupNames.length; i++)
-                Dismissible(
+                Column(
                   key: ValueKey(state.groupNames[i]),
-                  direction: DismissDirection.none,
-                  child: ListTile(
-                    leading: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        _showRenameDialog(context, i, state.groupNames[i]);
-                      },
+                  children: [
+                    Dismissible(
+                      key: ValueKey('dismiss_${state.groupNames[i]}'),
+                      direction: DismissDirection.none,
+                      child: ListTile(
+                        leading: IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            _showRenameDialog(context, i, state.groupNames[i]);
+                          },
+                        ),
+                        title: Text(state.groupNames[i]),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            _showDeleteConfirmation(
+                              context,
+                              i,
+                              state.groupNames[i],
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                    title: Text(state.groupNames[i]),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        _showDeleteConfirmation(
-                          context,
-                          i,
-                          state.groupNames[i],
-                        );
-                      },
-                    ),
-                  ),
+                    if (i < state.groupNames.length - 1)
+                      const Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Colors.black12,
+                      ),
+                  ],
                 ),
             ],
           ),

@@ -29,7 +29,6 @@ class _CreateWatchlistBottomSheetState
     super.initState();
     _controller = TextEditingController();
     _focusNode = FocusNode();
-    // Show keyboard automatically when the bottom sheet opens
     Future.delayed(const Duration(milliseconds: 200), () {
       if (mounted) {
         FocusScope.of(context).requestFocus(_focusNode);
@@ -61,7 +60,6 @@ class _CreateWatchlistBottomSheetState
       listenWhen: (prev, curr) =>
           prev.groupNames.length != curr.groupNames.length,
       listener: (context, state) {
-        // Close the sheet if a new watchlist was added
         if (state.groupNames.length > widget.currentWatchlistCount) {
           Navigator.pop(context);
         }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TabPlaceholder extends StatelessWidget {
   final String title;
   final String message;
-  final IconData icon; // You can use an image asset if you prefer
+  final IconData icon;
 
   const TabPlaceholder({
     super.key,
