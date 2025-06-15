@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_market_app_demo/core/utils/app_strings.dart';
-import '../../core/utils/constants.dart';
 import '../../domain/entities/stock.dart';
 import '../bloc/watchlist/watchlist_bloc.dart';
-import '../bloc/watchlist/watchlist_event.dart';
 import '../bloc/watchlist/watchlist_state.dart';
 import '../bloc/search/search_bloc.dart';
 import '../bloc/search/search_event.dart';
 import '../bloc/search/search_state.dart';
+import '../widgets/search_stock_list.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -61,66 +60,10 @@ class SearchPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    body: ListView.builder(
-                      itemCount: searchState.results.length,
-                      itemBuilder: (context, index) {
-                        final stock = searchState.results[index];
-                        final inWatchlist = currentWatchlist.any(
-                          (s) => s.code == stock.code,
-                        );
-
-                        return ListTile(
-                          title: Text(stock.code),
-                          subtitle: Text('${stock.name} • ${stock.exchange}'),
-                          trailing: IconButton(
-                            icon: Icon(
-                              inWatchlist
-                                  ? Icons.check_circle
-                                  : Icons.add_circle_outline,
-                              color: inWatchlist ? Colors.green : Colors.grey,
-                            ),
-                            onPressed: () {
-                              if (inWatchlist) {
-                                watchlistBloc.add(
-                                  RemoveStockFromWatchlist(
-                                    watchlistState.selectedGroupIndex,
-                                    stock,
-                                  ),
-                                );
-                              } else {
-                                if (currentWatchlist.length >=
-                                    kMaxStocksPerWatchlist) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: const Text(
-                                        AppStrings.watchlistFull,
-                                      ),
-                                      content: const Text(
-                                        AppStrings.watchlistFullAlert,
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context),
-                                          child: const Text(AppStrings.ok),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                } else {
-                                  watchlistBloc.add(
-                                    AddStockToWatchlist(
-                                      watchlistState.selectedGroupIndex,
-                                      stock,
-                                    ),
-                                  );
-                                }
-                              }
-                            },
-                          ),
-                        );
-                      },
+                    body: SearchStockList(
+                      stocks: searchState.results,
+                      currentWatchlist: currentWatchlist,
+                      selectedGroupIndex: watchlistState.selectedGroupIndex,
                     ),
                   );
                 },
